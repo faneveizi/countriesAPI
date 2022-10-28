@@ -6,18 +6,18 @@ import Search from "../Search/Search";
 import { Link } from "react-router-dom";
 
 const countriesReducer = (state, action) => {
-  if (action.type === 'DATA'){
-    return { value: action.val }
+  if (action.type === "DATA") {
+    return { value: action.val };
   }
-}
+};
 
 const AllCountries = (props) => {
-
-  const [countriesState, dispatchCountries] = useReducer(countriesReducer, {countriesState: []})
-  // const [countries, setCountries] = useState([]);
+  const [countriesState, dispatchCountries] = useReducer(countriesReducer, {
+    countriesState: [],
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  console.log(countriesState, 'countries state')
+  console.log(countriesState, "countries state");
   const getAllCountries = async () => {
     try {
       const res = await fetch(`${apiURL}/all`);
@@ -26,15 +26,14 @@ const AllCountries = (props) => {
 
       const data = await res.json();
 
-      dispatchCountries({type: 'DATA', val: data});
+      dispatchCountries({ type: "DATA", val: data });
       console.log(data);
-      // setCountries(data);
 
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       setError(error.message);
-    } 
+    }
   };
 
   const getCountryByName = async (countryName) => {
@@ -44,9 +43,8 @@ const AllCountries = (props) => {
       if (!res.ok) {
         throw new Error("The country was not found!");
       }
-      const data =  await await res.json();
-      dispatchCountries({type: 'DATA', val: data})
-      // setCountries(data);
+      const data = await await res.json();
+      dispatchCountries({ type: "DATA", val: data });
 
       setIsLoading(false);
     } catch (error) {
@@ -67,9 +65,6 @@ const AllCountries = (props) => {
             <Search onSearch={getCountryByName} />
           </div>
         </div>
-        {/* <div>
-          <Button />
-        </div> */}
 
         <div className="country__bottom">
           {isLoading && !error && <h4>Loading...</h4>}
@@ -95,10 +90,6 @@ const AllCountries = (props) => {
           ))}
         </div>
       </div>
-      {/* <div>
-        <Footer />
-        <FooterButton ref={ref}>{props.children}</FooterButton>
-      </div> */}
     </>
   );
 };

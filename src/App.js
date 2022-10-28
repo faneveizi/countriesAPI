@@ -66,7 +66,7 @@ function App(props) {
       ref.current?.scrollIntoView({ behavior: "smooth" });
     };
     return (
-      <div align="center" >
+      <div align="center">
         <button id="scroll" type="button" onClick={handleClick}>
           Go to chart
         </button>
